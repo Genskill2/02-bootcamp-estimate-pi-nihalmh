@@ -1,4 +1,5 @@
 import math
+import random
 import unittest
 
 class TestWallis(unittest.TestCase):
@@ -17,7 +18,20 @@ def wallis(n):
 	for i in range (1,n+1):
 		p = p*(4*(i**2)/((4*(i**2))-1))
 	return (p*2)
-		
+	
+def monte_carlo(n):
+  count=0
+  total=n
+  for i in range(0,n):
+    x=random.random()
+    y=random.random()
+    d=math.sqrt(x**2 + y**2)
+    if d<1:
+      count=count+1
+  ratio=count/total
+  pi_val=4*ratio
+  return pi_val     
+
 class TestMC(unittest.TestCase):
     def test_randomness(self):
         pi0 = monte_carlo(15000)
